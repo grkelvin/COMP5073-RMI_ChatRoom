@@ -10,10 +10,11 @@ import javax.swing.JOptionPane;
 
 import server.RMIServerIF;
 
-public class Client  extends UnicastRemoteObject implements RMIClientIF {
+public class Client extends UnicastRemoteObject implements RMIClientIF {
 	/**
-	 * 
+	 * Client: Get the stub of the remote object through the naming server RMIregistry
 	 */
+	//serialization mechanism verifies version consistency by determining the serialVersionUID of the class at runtime.
 	private static final long serialVersionUID = 7468891722773409712L;
 	ClientGUI chatGUI;
 	private String hostName = "localhost";
@@ -25,10 +26,8 @@ public class Client  extends UnicastRemoteObject implements RMIClientIF {
 
 	
 	/**
-	 * class constructor,
-	 * note may also use an overloaded constructor with 
-	 * a port no passed in argument to super
-	 * @throws RemoteException
+	 * constructor
+	 * note may also use an overloaded constructor with a port no passed in argument to super
 	 */
 	public Client(ClientGUI aChatGUI, String userName) throws RemoteException {
 		super();
@@ -67,7 +66,6 @@ public class Client  extends UnicastRemoteObject implements RMIClientIF {
 		System.out.println("Client Listen RMI Server is running...\n");
 	}
 
-
 	/**
 	 * pass our username, hostname and RMI service name to
 	 * the server to register out interest in joining the chat
@@ -83,7 +81,6 @@ public class Client  extends UnicastRemoteObject implements RMIClientIF {
 		}
 	}
 
-	//=====================================================================
 	/**
 	 * Receive a string from the chat server
 	 * this is the clients RMI method, which will be used by the server 
@@ -93,7 +90,7 @@ public class Client  extends UnicastRemoteObject implements RMIClientIF {
 	public void messageFromServer(String message) throws RemoteException {
 		System.out.println( message );
 		chatGUI.textArea.append( message );
-		//make the gui display the last appended text, ie scroll to bottom
+		//make the GUI display the last appended text, such as scroll to bottom
 		chatGUI.textArea.setCaretPosition(chatGUI.textArea.getDocument().getLength());
 	}
 
@@ -113,7 +110,7 @@ public class Client  extends UnicastRemoteObject implements RMIClientIF {
 		chatGUI.clientPanel.revalidate();
 	}
 
-}//end class
+}
 
 
 

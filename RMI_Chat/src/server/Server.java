@@ -1,5 +1,9 @@
 package server;
 
+
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.PrintStream;
 import java.net.MalformedURLException;
 import java.rmi.Naming;
 import java.rmi.NotBoundException;
@@ -12,7 +16,7 @@ import java.util.Vector;
 import client.RMIClientIF;
 
 public class Server extends UnicastRemoteObject implements RMIServerIF {
-	String divide = "---------------------------------------------\n";
+	String divide = "---------------------------------------------\n";// format symbol
 	private Vector<Chatter> chatters;
 	private static final long serialVersionUID = 1L;
 	
@@ -21,7 +25,8 @@ public class Server extends UnicastRemoteObject implements RMIServerIF {
 		super();
 		chatters = new Vector<Chatter>(10, 1);
 	}
-	
+	//-----------------------------------------------------------
+	// The following is local methods
 	//-----------------------------------------------------------
 	/**
 	 * LOCAL METHODS
@@ -65,6 +70,7 @@ public class Server extends UnicastRemoteObject implements RMIServerIF {
 	/*
 	 *   REMOTE METHODS
 	 */
+	//-----------------------------------------------------------
 	
 	/**
 	 * Return a message to client
@@ -81,6 +87,7 @@ public class Server extends UnicastRemoteObject implements RMIServerIF {
 	 */
 	public void updateChat(String name, String nextPost) throws RemoteException {
 		String message =  name + " : " + nextPost + "\n";
+		// send a string to all connected clients
 		groupSend(message);
 	}
 	
@@ -216,7 +223,7 @@ public class Server extends UnicastRemoteObject implements RMIServerIF {
 		}
 	}
 	
-}//END CLASS
+}
 
 
 

@@ -32,7 +32,7 @@ public class ClientGUI extends JFrame implements ActionListener{
 	private JPanel textPanel, inputPanel;
 	private JTextField textField;
 	private String name, message;
-	private Font meiryoFont = new Font("Meiryo", Font.PLAIN, 14);
+	private Font meiryoFont = new Font("Arial", Font.PLAIN, 15);
 	private Border blankBorder = BorderFactory.createEmptyBorder(10,10,20,10);//top,r,b,l
 	private Client chatClient;
     private JList<String> list;
@@ -44,7 +44,7 @@ public class ClientGUI extends JFrame implements ActionListener{
     protected JPanel clientPanel, userPanel;
 
 	/**
-	 * Main method to start client GUI app.
+	 * Main method to start client GUI.
 	 * @param args
 	 */
 	public static void main(String args[]){
@@ -68,7 +68,7 @@ public class ClientGUI extends JFrame implements ActionListener{
 	 */
 	public ClientGUI(){
 			
-		frame = new JFrame("Client Chat Console");	
+		frame = new JFrame("Chat for Client Console");	
 	
 		//-----------------------------------------
 		/*
@@ -123,7 +123,7 @@ public class ClientGUI extends JFrame implements ActionListener{
 	 * @return
 	 */
 	public JPanel getTextPanel(){
-		String welcome = "Welcome enter your name and press Start to begin\n";
+		String welcome = "Welcome! Please enter your name and press Start to begin\n";
 		textArea = new JTextArea(welcome, 14, 34);
 		textArea.setMargin(new Insets(10, 10, 10, 10));
 		textArea.setFont(meiryoFont);
@@ -135,7 +135,7 @@ public class ClientGUI extends JFrame implements ActionListener{
 		textPanel = new JPanel();
 		textPanel.add(scrollPane);
 	
-		textPanel.setFont(new Font("Meiryo", Font.PLAIN, 14));
+		textPanel.setFont(new Font("Arial", Font.PLAIN, 15));
 		return textPanel;
 	}
 	
@@ -164,7 +164,7 @@ public class ClientGUI extends JFrame implements ActionListener{
 		
 		JLabel userLabel = new JLabel(userStr, JLabel.CENTER);
 		userPanel.add(userLabel, BorderLayout.NORTH);	
-		userLabel.setFont(new Font("Meiryo", Font.PLAIN, 16));
+		userLabel.setFont(new Font("Arial", Font.PLAIN, 16));
 
 		String[] noClientsYet = {"No other users"};
 		setClientPanel(noClientsYet);
@@ -212,7 +212,7 @@ public class ClientGUI extends JFrame implements ActionListener{
 		sendButton.addActionListener(this);
 		sendButton.setEnabled(false);
 
-        privateMsgButton = new JButton("Send PM");
+        privateMsgButton = new JButton("Send to PM");
         privateMsgButton.addActionListener(this);
         privateMsgButton.setEnabled(false);
 		
@@ -239,9 +239,9 @@ public class ClientGUI extends JFrame implements ActionListener{
 			if(e.getSource() == startButton){
 				name = textField.getText();				
 				if(name.length() != 0){
-					frame.setTitle(name + "'s console ");
+					frame.setTitle(name + "'s Console ");
 					textField.setText("");
-					textArea.append("username : " + name + " connecting to chat...\n");							
+					textArea.append("Username : " +"["+ name+"]"+ " is" + " connecting to chat...\n");							
 					getConnected(name);
 					if(!chatClient.connectionProblem){
 						startButton.setEnabled(false);
